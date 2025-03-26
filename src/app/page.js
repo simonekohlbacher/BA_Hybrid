@@ -1,28 +1,37 @@
-"use client";
+import ProductList from "./components/ProductList";
+import Link from "next/link";
+import Image from "next/image";
 
-// Das HTML, das durch diese Komponente erzeugt wird, wird initial vom Server gesendet, aber nach dem Laden im Browser wird es durch React auf der Client-Seite hydratisiert und interaktiv gemacht.
-
-import ProductList from './components/ProductList';
 export default function Home() {
-
     return (
         <main>
             <div className="p-24 text-center">
-                <h1 className="text-3xl font-bold">Willkommen zur Hybrid-App!</h1>
-                <p className="text-xl mt-2 text-gray-600">Diese Anwendung nutzt verschiedene Rendering-Techniken.</p>
+                <h1 className="text-3xl font-bold">Willkommen zur Hybrid-App.</h1>
+                <p className="text-xl mt-2 text-gray-600">
+                    Diese Anwendung nutzt verschiedene Rendering-Techniken, um Inhalte darzustellen.<br />
+                    Im Vergleich dazu steht die <Link href="http://ba-csr.vercel.app" target="_blank" className="underline"> Seite mit reinem CSR</Link>.<br />
+                </p>
             </div>
 
-            <div className="bg-gray-800 grid grid-cols-2 gap-4 p-4 mt-12 text-white">
-                <div className="mx-12 py-12 text-left">
-                    <h2 className="text-xl font-bold">CSSR</h2>
-                    <p className="mt-2 mb-12">Diese Seite wird  gerendert.</p>
+            <div className="bg-gray-800 grid grid-cols-2 gap-4 mt-12 text-white">
+                <div className="m-24 py-12 text-left">
+                    <h2 className="text-2xl font-bold">Eingesetzte Techniken</h2>
+                    <p className="text-xl mt-2 mb-12">Diese Seite wird serverseitig (mit SSR) gerendert.<br />
+                        Dabei wird die Seite im Browser aufgebaut und die Inhalte dynamisch nachgeladen.<br />
+                    </p>
                 </div>
-                <div className="mx-12 py-12 justify-self-end">
-                    <img src="/logo_inverted.png" alt="Logo" className="h-48" />
+                <div className="justify-self-end">
+                    <Image src="/coding1.jpg" alt="Laptop und Notizbuch auf Schreibtisch" priority="priority" href="https://www.pexels.com/de-de/foto/blauer-einziehbarer-stift-574070/" width="700" height="700" />
                 </div>
+            </div>
+
+            <div className="text-center mx-48 my-24">
+                <h2 className="text-2xl font-bold">Test</h2>
+                <p className="text-xl mt-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. </p>
             </div>
 
             <ProductList />
         </main>
     );
+
 }

@@ -1,36 +1,21 @@
-"use client";
-
-import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 
-const ProductList = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+export default async function ProductList() {
 
-    useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(response => response.json())
-            .then(data => {
-                setProducts(data);
-                setLoading(false);
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Products could not be loaded', error);
-                setLoading(false);
-            });
-    }, []);
+    const res = await fetch('https://fakestoreapi.com/products');
+    const products = await res.json();
 
-    if (loading) {
-        return <p className="text-center text-xl">Loading...</p>;
+    if (!Array.isArray(products)) {
+        return <p>No products available</p>;
     }
 
     return (
         <div className="bg-gray-100 p-8">
             <h2 className="text-3xl font-bold text-center mb-6">Products</h2>
             <p className="text-xl text-center mb-12">Lorem ipsum</p>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mx-24">
-                {products.map(product => (
+                {products.map((product) => (
                     <ProductCard
                         key={product.id}
                         title={product.title}
@@ -42,6 +27,4 @@ const ProductList = () => {
             </div>
         </div>
     );
-};
-
-export default ProductList;
+}
