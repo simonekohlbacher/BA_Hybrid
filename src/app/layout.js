@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
             <img src="/logo_inverted.png" alt="Logo" className="h-12" />
             <div className="mr-12">
                 <Link href="/" className="mr-4">Home</Link>
-                <Link href="/dashboard">Info</Link>
+                <Link href="/">Info</Link>
             </div>
         </nav>
         {children}

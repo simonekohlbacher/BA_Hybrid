@@ -5,7 +5,7 @@ export default async function ProductList({ selectedCategory }) {
     const url = selectedCategory
     ? `https://fakestoreapi.com/products/category/${selectedCategory}`
         : 'https://fakestoreapi.com/products';
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: "force-cache" });
     const products = await response.json();
 
     if (!Array.isArray(products)) {
