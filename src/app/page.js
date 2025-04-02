@@ -8,7 +8,7 @@ import Image from "next/image";
 // Fetch-Kategorien direkt im Server-Context (SSG)
 async function getCategories() {
     const response = await fetch("https://fakestoreapi.com/products/categories", {
-        next: { revalidate: 3600 }, // fetch neq data every hour
+        next: { revalidate: 3600 }, // fetch data every hour
     });
     return response.json();
 }

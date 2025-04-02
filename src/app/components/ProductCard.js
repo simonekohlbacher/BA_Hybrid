@@ -1,5 +1,6 @@
 "use client";
 import React from 'react'
+import Link from 'next/link';
 import { CButton, CCard, CCardBody, CCardImage, CCardText, CCardTitle } from '@coreui/react'
 
 const ProductCard = ({ id, title, description, image, price }) => {
@@ -16,7 +17,11 @@ const ProductCard = ({ id, title, description, image, price }) => {
                 <CCardText className="text-gray-600 flex-grow">{truncatedDescription}</CCardText>
                 <div className="flex justify-between items-center mt-12">
                     <span className="text-lg font-semibold text-green-600">${price}</span>
-                    <CButton className="bg-gray-800 rounded px-4 px-2 text-white hover:bg-blue-600" href="#">Nice</CButton>
+                    <Link href={`/products/detail/${id}`}>
+                        <CButton className="bg-gray-800 rounded px-4 px-2 text-white hover:bg-gray-600">
+                            Detail
+                        </CButton>
+                    </Link>
                 </div>
             </CCardBody>
         </CCard>

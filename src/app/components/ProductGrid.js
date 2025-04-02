@@ -19,6 +19,7 @@ export default async function ProductList({ selectedCategory, showBackButton, sh
                 {products.map((product) => (
                     <ProductCard
                         key={product.id}
+                        id={product.id}
                         title={product.title}
                         description={product.description}
                         image={product.image}
