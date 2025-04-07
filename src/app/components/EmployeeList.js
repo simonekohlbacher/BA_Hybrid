@@ -1,20 +1,24 @@
 
-export default async function UserList() {
+const fetchUsers = async () => {
     const res = await fetch('https://randomuser.me/api/?results=50', {
-        next: { revalidate: 604800 }, // fetch data every week
     });
     const data = await res.json();
-    const users = data.results;
+    return data.results;
+};
+
+export const revalidate = 604800; // 7 Tage in Sekunden
+
+export default async function UserList() {
+    const users = await fetchUsers();
 
     return (
         <div className="p-4 mx-12 mt-12">
             <h1 className="text-3xl font-bold mb-6 text-center">Mitarbeiterübersicht</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {users.map((user, index) => (
+                {users.map((user) => (
                     <div
                         key={user.login.uuid}
-                        className="p-4 border rounded-xl shadow-sm hover:shadow-md transition flex items-center gap-6"
-                    >
+                        className="p-4 border rounded-xl shadow-sm hover:shadow-md transition flex items-center gap-6">
                         <img
                             src={user.picture.large}
                             alt={`${user.name.first} ${user.name.last}`}

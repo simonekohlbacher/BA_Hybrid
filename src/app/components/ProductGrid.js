@@ -1,15 +1,21 @@
 import ProductCard from '../components/ProductCard';
 import Link from 'next/link';
 
-export default async function ProductList({ selectedCategory, showBackButton, showMoreButton}) {
+const fetchProducts = async (selectedCategory) => {
     const url = selectedCategory
         ? `https://fakestoreapi.com/products/category/${selectedCategory}`
         : "https://fakestoreapi.com/products";
     const response = await fetch(url, { cache: "force-cache" });
     const products = await response.json();
+    return products;
+};
+export const revalidate = 3600; // Regeneration alle 60 Minuten
+
+export default async function ProductList({ selectedCategory, showBackButton, showMoreButton }) {
+    const products = await fetchProducts(selectedCategory);
 
     if (!Array.isArray(products)) {
-        return <p>No products available</p>;
+        return <p>Keine Produkte verfügbar</p>;
     }
 
     return (
