@@ -6,6 +6,9 @@ export default async function ProductCategoryPage({ params }) {
     const products = await response.json();
 
     return (
-        <ProductList selectedCategory={category} />
+        <div>
+            <h1 className="text-2xl font-bold text-center m-12">Produkte in {category}</h1>
+            <ProductList selectedCategory={category} />
+        </div>
     );
 }

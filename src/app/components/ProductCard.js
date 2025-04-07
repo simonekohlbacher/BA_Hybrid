@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link';
 import { CButton, CCard, CCardBody, CCardImage, CCardText, CCardTitle } from '@coreui/react'
 
-// Code from https://coreui.io/react/docs/components/card/
+// Code from https://coreui.io/react/docs/components/card/ bzw. coreui.io/react/docs/3.3/components/CCard
 const ProductCard = ({ id, title, description, image, price }) => {
     // shorten description (max 100 char) and add "..."
     const truncatedDescription = description.length > 100 ? description.substring(0, 100) + "..." : description;
