@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 
+
 const ImageSlider = ({images}) => {
 
     // state current pic

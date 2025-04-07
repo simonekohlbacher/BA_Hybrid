@@ -1,11 +1,11 @@
 import CategoryList from "./components/CategoryList";
 import ImageSlider from './components/ImageSlider';
 import ProductTeaser from "./components/ProductTeaser";
+import EmployeeList from "./components/EmployeeList";
 import Link from "next/link";
 import Image from "next/image";
 
 
-// Fetch-Kategorien direkt im Server-Context (SSG)
 async function getCategories() {
     const response = await fetch("https://fakestoreapi.com/products/categories", {
         next: { revalidate: 3600 }, // fetch data every hour
@@ -36,18 +36,23 @@ export default async function Home() {
             <div className="bg-gray-800 grid grid-cols-2 gap-4 mt-12 text-white">
                 <div className="m-24 py-12 text-left">
                     <h2 className="text-2xl font-bold">Eingesetzte Techniken</h2>
-                    <p className="text-xl mt-2 mb-12">Diese Seite wird serverseitig (mit SSR) gerendert.<br />
-                        Dabei wird die Seite im Browser aufgebaut und die Inhalte dynamisch nachgeladen.<br />
+                    <p className="text-xl mt-2 mb-12">Diese Seite wird teilweise serverseitig (mit SSR und SSG) gerendert.<br />
+                        Dabei sind einzelene Komponenten noch mit CSR gerendert, darum ist dies eine hybride App.<br />
                     </p>
                 </div>
                 <div className="justify-self-end">
-                    <Image src="/coding1.jpg" alt="Laptop und Notizbuch auf Schreibtisch" priority={true} href="https://www.pexels.com/de-de/foto/blauer-einziehbarer-stift-574070/" width="700" height="700" />
+                    <Image src="/coding1.jpg" alt="Laptop und Notizbuch auf Schreibtisch" priority={true} width="700" height="700" />
+                    <p>Bild Quelle von: https://www.pexels.com/de-de/foto/blauer-einziehbarer-stift-574070/</p>
                 </div>
             </div>
 
             <div className="text-center mx-48 my-24">
-                <h2 className="text-2xl font-bold">Test</h2>
-                <p className="text-xl mt-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. </p>
+                <h2 className="text-2xl font-bold">Bilderslider</h2>
+                <p className="text-xl mt-2">
+                    Im Folgenden wird ein Bildslider erstellt, der vier Bilder enthält, durch die du dich durchklicken kannst.
+                    Er wird clientseitig gerendert, da er eine Interaktion von den Nutzer:innen erfordert und dabei ein Zustand gespeichert wird.
+                    Jedoch werden die Bilder bereits am Server vorbereitet.
+                </p>
             </div>
 
             <ImageSlider images={images} />
@@ -60,10 +65,12 @@ export default async function Home() {
 
 
             <div className="bg-gray-800 text-center text-white p-24">
-                <h2 className="text-2xl font-bold">Test</h2>
-                <p className="text-xl mt-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. </p>
+                <h2 className="text-2xl font-bold">Daten fetchen</h2>
+                <p className="text-xl mt-2">Um nun noch weitere Daten zu fetchen, holen wir uns 50 Mitarbeiter:innen von einer Open Source API rei (https://randomuser.me), die uns Fake Daten und Bilder übermittelt. Diese Visitenkarten werden nun vom Server zusammengestellt und an den Client fix und fertig gesendet.</p>
             </div>
 
+            {/* Employees */}
+            <EmployeeList/>
 
             <div className="grid grid-cols-2 gap-4 mt-12">
                 <div className="m-24 py-12 text-left">
@@ -74,6 +81,7 @@ export default async function Home() {
                 </div>
                 <div className="justify-self-end">
                     <Image src="/coding1.jpg" alt="Laptop und Notizbuch auf Schreibtisch" priority={false} href="https://www.pexels.com/de-de/foto/blauer-einziehbarer-stift-574070/" width="700" height="700" />
+                    <p>Bild Quelle von: https://www.pexels.com/de-de/foto/blauer-einziehbarer-stift-574070/</p>
                 </div>
             </div>
 
